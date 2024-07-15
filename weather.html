@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" >
+    <style>
+        *{box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;}
+        body{
+            font-family: Arial, sans-serif;
+            background-color: hsl(0, 0%, 80%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .wind-info{
+            background-color: brown;
+            color: gray;
+
+            /* width: 100px; */
+
+        }
+        .pressure-info{
+            color: gray;
+            height: 100px;
+            background-color:  transparent ;
+            left: 100px;
+        }
+        .other-info {
+        position: absolute; 
+        top: 10px; 
+        left: 10px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        }
+        .other-info.info {
+        margin-right: 10px;
+        background-color: #fff; 
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 2rem;
+        color: #333;
+        }
+        .info{
+            min-width: 4rem;
+            min-height: 4rem;
+            padding: 2px;
+            margin: 0.7rem;
+            border-radius: 50%;
+            margin-left: 1px;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .info i{
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        .info:hover{
+            min-width: 4.2rem;
+            min-height: 4.5rem;
+            border-radius: 50%;
+        }
+        
+        .normal{
+            background-image: url('bright.jfif');
+            background-repeat: no-repeat;
+            background-position: top;
+            background-attachment: fixed;
+            background-size: cover;
+            background-blend-mode: multiply;  /* Optional: darken the image slightly */
+            backdrop-filter: blur(5px);  /* Adjust blur level for desired effect */
+            background-color: #fffffff5;
+        }
+        .night{
+            background-image: url('paper city.jfif');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover;
+            background-blend-mode: multiply;  /* Optional: darken the image slightly */
+            backdrop-filter: blur(5px);  /* Adjust blur level for desired effect */
+            background-color: #fffffff5;
+        }
+        .weatherform{
+            margin: 20px;
+        }
+        .cityinput{
+            padding: 10px;
+            font-size: 1.5rem;
+            border-radius: 0.6rem;
+            border: none;
+            margin: 10px;
+            width: 300px;
+        }
+        button[type="submit"]{
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 2rem;
+            transition: background-position 0.5s ease-out;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .normalb{
+            background-image:linear-gradient(to right, hsl(73, 100%, 70%), hsl(106, 59%, 43%));
+            background-size: 100% 200px; 
+            background-position: 0% 100%;
+            color: hsl(0, 0%, 89%);
+        }
+        .nightb{
+            background-image: linear-gradient(to right, hsl(10, 19%, 40%), hsl(0, 0%, 50%));
+            background-size: 100% 200px; 
+            background-position: 0% 100%;
+            color: gray;
+        }
+        .dayb{
+            background-image: transparent;
+            color: #110a0a;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .button[type="submit"]:hover {
+         background-position: 100% 100%;
+        }
+        .card{
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px hsl(50, 0%, 20%);
+            min-width: 40%;
+            min-height: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1{
+            font-size: 3.5rem;
+            margin-top: 0px;
+            margin-bottom: 25px;
+        }
+        p{
+            font-size: 1.5rem;
+            margin: 5px 0px;
+        }
+        .card.nighb > .Citydisplay{
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+        .card.nightb > .tempDisplay{
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+        .card.nightb > .humidityDisplay{
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        .card.nightb > .descriptionDisplay{
+            font-style: italic;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        .card.dayb > .Citydisplay{
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+        .card.dayb > .tempDisplay{
+            font-size: 3.5rem;
+            font-weight: bold;
+        }  
+        .card.dayb > .humidityDisplay{
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        .card.dayb > .descriptionDisplay{
+            font-style: italic;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        .weatheremoji{
+            margin: 0;
+            font-size: 7.5rem;
+        }
+        .errordisplay{
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: hsl(45, 13%, 30%);
+            color: #F7F7F7;
+        }
+        .clock-container{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: absolute;
+            background-image: url("clock.jfif");
+            background-size: cover;
+            top: 5%;
+            right: 5%;
+        }
+        .clockhand {
+        position: absolute;
+        right: 47%;
+        bottom: 50%;
+        width: 5px;        
+        transform-origin: bottom;
+        }
+        .hourhand {
+        transform: rotate(0deg);
+        height: 30%;
+        background-color: brown;
+        }
+        .minutehand { 
+            transform: rotate(0deg); 
+            background-color: black;
+            height: 42%;
+        }
+        .day{
+            background-image: url('cutesun.jfif');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover;
+            background-blend-mode: multiply;  /* Optional: darken the image slightly */
+            backdrop-filter: blur(5px);  /* Adjust blur level for desired effect */
+            background-color: #fffffff5;
+        }
+
+    </style>
+</head>
+<body class="normal">
+        <div class="other-info">
+            <button id="one" class="wind info normalb" ><i class="fa-solid fa-wind"></i></button>
+            <!-- <button id="two" class="level info"><i class="fa-solid fa-arrow-up-from-ground-water"></i></button> -->
+            <button id="two" class="info pressure normalb" style="font-size: 2.5rem;">🌬</button>
+        </div>
+        <div class="clock-container">
+            <div class="clockhand hourhand"></div>
+            <div class="clockhand minutehand"></div>
+        </div>
+        <form class="weatherform" >
+            <input type="text" class="cityinput" placeholder="Enter the City">
+            <button type="submit" class="button normalb">Get Weather</button>
+        </form>
+        <div class="card normalb"  style="display: none;"></div>
+
+    <script src="weather.js"></script>
+</body>
+</html>
