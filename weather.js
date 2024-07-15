@@ -6,6 +6,7 @@ const info= document.querySelector(".info")
 const one= document.getElementById("one")
 const two= document.getElementById("two")
 const other_info= document.querySelector(".other-info")
+// const apikey= get your api key from https://openweathermap.org/
 let hourHand= document.querySelector(".hourhand")
 let minuteHand= document.querySelector(".minutehand")
 let data;
