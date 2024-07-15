@@ -3,7 +3,6 @@ const cityInput= document.querySelector(".cityinput")
 const card= document.querySelector(".card")
 const enter= document.querySelector(".button")
 const info= document.querySelector(".info")
-const apikey="47218f1aa0cd885f577d206b20825e2a";
 const one= document.getElementById("one")
 const two= document.getElementById("two")
 const other_info= document.querySelector(".other-info")
